@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مولد أسماء عربية للأولاد والبنات | عادية ونادرة وقديمة</title>
+    <meta name="description" content="أداة مجانية لتوليد أسماء عربية للأولاد والبنات، عادية ونادرة وقديمة مع زر نسخ الاسم بسهولة.">
+    <meta name="keywords" content="أسماء, أسماء عربية, أسماء أولاد, أسماء بنات, أسماء نادرة, أسماء قديمة">
+    <meta name="author" content="Ahmed Rashad">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: #fff;
+            text-align: center;
+        }
+        header {padding: 60px 20px;}
+        header h1 {font-size: 40px;}
+        .box {
+            background: rgba(255,255,255,0.08);
+            max-width: 520px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 18px;
+        }
+        select, button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border-radius: 25px;
+            border: none;
+            font-size: 16px;
+        }
+        select {background: #fff;}
+        button {
+            background: #00ffc3;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {background: #00cfa0;}
+        .result {
+            margin-top: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #00ffc3;
+        }
+        .copy-msg {margin-top: 10px;font-size: 14px;color: #aaffea;display: none;}
+        .links {margin-top: 20px;}
+        .links a {color:#00ffc3;text-decoration:none;margin:0 10px;}
+        footer {margin:40px 0 20px;font-size:14px;opacity:0.7;}
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🔮 مولد أسماء عربي</h1>
+    <p>عادية – نادرة – قديمة | اختر نوع الاسم وابدأ التوليد</p>
+</header>
+
+<div class="box">
+
+    <select id="gender">
+        <option value="boys">أسماء أولاد</option>
+        <option value="girls">أسماء بنات</option>
+    </select>
+
+    <select id="rarity">
+        <option value="normal">عادية</option>
+        <option value="rare">نادرة / قديمة</option>
+    </select>
+
+    <button onclick="generateName()">✨ ولّد اسم</button>
+
+    <div class="result" id="result">---</div>
+
+    <button onclick="copyName()">📋 نسخ الاسم</button>
+    <div class="copy-msg" id="copyMsg">✅ تم نسخ الاسم</div>
+
+    <div class="links">
+        <a href="boys.html">أسماء أولاد</a>
+        <a href="girls.html">أسماء بنات</a>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 - مولد أسماء عربي
+</footer>
+
+<script>
+    const boysNormal = ["محمد","أحمد","عمر","علي","يوسف","خالد","سيف","حمزة","آدم","ياسين","زياد","نور"];
+    const girlsNormal = ["فاطمة","عائشة","مريم","سارة","ليان","نور","ريم","جنى","تالا","رنا","سلمى","لينا"];
+    const boysRare = ["إياس","قُصي","سُهيل","مِهند","لؤي","نُعمان","زُهير","هُمام","بِلال","حارث","يزن","عُدي","ثابت","أنس"];
+    const girlsRare = ["خَوْلة","سُكينة","هند","رُقية","أروى","لبنى","رَيْحانة","جميلة","عَفراء","سُهيلة","صفية","ميسون"];
+
+    function generateName() {
+        const gender = document.getElementById("gender").value;
+        const rarity = document.getElementById("rarity").value;
+        let list = [];
+        if (gender === "boys" && rarity === "normal") list = boysNormal;
+        if (gender === "boys" && rarity === "rare") list = boysRare;
+        if (gender === "girls" && rarity === "normal") list = girlsNormal;
+        if (gender === "girls" && rarity === "rare") list = girlsRare;
+        const name = list[Math.floor(Math.random() * list.length)];
+        document.getElementById("result").innerHTML = name;
+        document.getElementById("copyMsg").style.display = "none";
+    }
+
+    function copyName() {
+        const name = document.getElementById("result").innerText;
+        if (name === "---") return;
+        navigator.clipboard.writeText(name);
+        const msg = document.getElementById("copyMsg");
+        msg.style.display = "block";
+        setTimeout(()=>{msg.style.display="none";},2000);
+    }
+</script>
+
+</body>
+</html>
